@@ -5,6 +5,8 @@ inputs:
   github_token:
     description: 'GITHUB_TOKEN'
     default: ${{ github.token }}
+  working-directory:
+    default: ''
   reek_version:
     description: 'Reek version'
   reek_flags:
@@ -39,6 +41,7 @@ runs:
   steps:
     - run: $GITHUB_ACTION_PATH/script.sh
       shell: sh
+      working-directory: ${{ inputs.working-directory }}
       env:
         REVIEWDOG_VERSION: v0.17.4
         # INPUT_<VARIABLE_NAME> is not available in Composite run steps
